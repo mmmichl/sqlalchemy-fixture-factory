@@ -20,6 +20,11 @@ class TestCase(object):
     Account = None
     Person = None
 
+    engine = None
+    connection = None
+    db_session = None
+    fix_fact = None
+
     def setup_method(self, method):
         self.Base = declarative_base()
 
