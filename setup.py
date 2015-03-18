@@ -8,6 +8,7 @@ Build test scenarios organically and instantiate them with one line including al
 """
 
 from __future__ import absolute_import, print_function, unicode_literals, division
+import sys
 
 import os
 import re
@@ -24,6 +25,8 @@ def get_version():
     pattern = r"^__version__ = '(.*?)'$"
     return re.search(pattern, contents, re.MULTILINE).group(1)
 
+needs_pytest = {'ptr', 'pytest', 'test'}.intersection(sys.argv)
+pytest_runner = ['pytest-runner'] if needs_pytest else []
 
 setup(
     name='SQLAlchemy-Fixture-Factory',
@@ -41,11 +44,11 @@ setup(
     install_requires=[
         'SQLAlchemy>=0.7',
     ],
-    extras_require = {
-        'test': [
-            'pytest',
-        ]
-    },
+    setup_requires=[] + pytest_runner,
+    test_suite='tests',
+    tests_require=[
+        'pytest',
+    ],
     classifiers=[
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Testing',
@@ -56,5 +59,5 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
-    ]
+    ],
 )
