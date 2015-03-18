@@ -1,10 +1,15 @@
 SQLAlchemy-Fixture-Factory
 ==========================
 
-|Build Status|
+|Build Status| |Version Status|
 
 A fixture factory for SQLAlchemy ORM mapper to easily build test scenarios for unit or integration testing.
 Inspired by Ruby's `factory_girl <https://github.com/thoughtbot/factory_girl>`_
+
+Installation
+----------
+
+    pip install sqlalchemy-fixture-factory
 
 
 Usage
@@ -176,3 +181,7 @@ Resources
 
 .. |Build Status| image:: https://travis-ci.org/mmmichl/sqlalchemy-fixture-factory.svg?branch=master
    :target: https://travis-ci.org/mmmichl/sqlalchemy-fixture-factory
+.. |Version Status| image:: https://pypip.in/version/SQLAlchemy-Fixture-Factory/badge.svg
+   :target: https://pypi.python.org/pypi/SQLAlchemy-Fixture-Factory/
+   :alt: Latest Version
+
