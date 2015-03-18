@@ -41,7 +41,11 @@ setup(
     install_requires=[
         'SQLAlchemy>=0.7',
     ],
-    extras_require = {},
+    extras_require = {
+        'test': [
+            'pytest',
+        ]
+    },
     classifiers=[
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Testing',
