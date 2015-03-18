@@ -6,6 +6,9 @@ script:
 env:
   - TOXENV=py26
   - TOXENV=py27
+  - TOXENV=py27-sqla09
   - TOXENV=py32
   - TOXENV=py33
   - TOXENV=py34
+  - TOXENV=py34-sqla09
+  - TOXENV=pypy
