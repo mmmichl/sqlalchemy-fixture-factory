@@ -1,7 +1,8 @@
-SQLAlchemy-Fixture-Factory
+SQLAlchemy-Fixture-Factory [![Build Status](https://travis-ci.org/mmmichl/sqlalchemy-fixture-factory.svg?branch=master)](https://travis-ci.org/mmmichl/sqlalchemy-fixture-factory)
 ==========================
-
 A fixture factory for SQLAlchemy ORM mapper to easily build test scenarios for unit or integration testing.
+
+
 
 
 Usage
