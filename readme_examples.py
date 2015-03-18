@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Executable file with the samples from README.md
+Executable file with the samples from README.rst
 """
 
 from __future__ import absolute_import, print_function, unicode_literals, division
