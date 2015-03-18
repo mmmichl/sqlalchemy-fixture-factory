@@ -5,8 +5,8 @@ Tests for the fixture
 """
 
 from __future__ import absolute_import, print_function, unicode_literals, division
-from sqlalchemy_fixture_factory import fix_fact
-from sqlalchemy_fixture_factory.fix_fact import BaseFix
+from sqlalchemy_fixture_factory import sqla_fix_fact
+from sqlalchemy_fixture_factory.sqla_fix_fact import BaseFix
 
 from tests import TestCase
 
@@ -51,7 +51,7 @@ class TestFixFact(TestCase):
         class FixPerson(BaseFix):
             MODEL = self.Person
             first_name = 'Franz'
-            account = fix_fact.subFactoryGet(FixPersonAccount)
+            account = sqla_fix_fact.subFactoryGet(FixPersonAccount)
 
         p = FixPerson(self.fix_fact)
 
@@ -78,7 +78,7 @@ class TestFixFact(TestCase):
         class FixPerson(BaseFix):
             MODEL = self.Person
             first_name = 'Franz'
-            account = fix_fact.subFactoryGet(FixPersonAccount, name='nixcheck')
+            account = sqla_fix_fact.subFactoryGet(FixPersonAccount, name='nixcheck')
 
         p = FixPerson(self.fix_fact, first_name='Peter')
 
@@ -104,7 +104,7 @@ class TestFixFact(TestCase):
         class FixPerson(BaseFix):
             MODEL = self.Person
             first_name = 'Franz'
-            account = fix_fact.subFactoryCreate(FixPersonAccount)
+            account = sqla_fix_fact.subFactoryCreate(FixPersonAccount)
 
         p = FixPerson(self.fix_fact)
 
@@ -182,7 +182,7 @@ class TestFixFact(TestCase):
             MODEL = self.Account
             name = 'peter'
             roles = [
-                fix_fact.subFactoryGet(AdminRole)
+                sqla_fix_fact.subFactoryGet(AdminRole)
             ]
 
         a = FixAccount(self.fix_fact).create()

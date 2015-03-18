@@ -9,7 +9,7 @@ from sqlalchemy import Table, Column, Integer, ForeignKey, Unicode, create_engin
 import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
-from sqlalchemy_fixture_factory.fix_fact import SqlaFixFact
+from sqlalchemy_fixture_factory.sqla_fix_fact import SqlaFixFact
 
 
 class TestCase(object):
