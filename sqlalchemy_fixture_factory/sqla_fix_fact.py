@@ -2,6 +2,9 @@
 
 """
 Fixture Factory for SQLAlchemy
+
+Copyright (c) 2005, Michael Pickelbauer
+License: MIT (see LICENSE for details)
 """
 from sqlalchemy import inspect
 from sqlalchemy.ext import hybrid
@@ -28,12 +31,12 @@ class SqlaFixFact():
         inst = self.db_session.merge(instance)
         self.db_session.flush()
 
-        self.instances[(Fixture.__name__, unicode(kwargs))] = inst
+        self.instances[(Fixture.__name__, str(kwargs))] = inst
 
         return inst
 
     def get(self, Fixture, **kwargs):
-        inst = self.instances.get((Fixture.__name__, unicode(kwargs)))
+        inst = self.instances.get((Fixture.__name__, str(kwargs)))
 
         if not inst:
             inst = Fixture(self, **kwargs).model()
