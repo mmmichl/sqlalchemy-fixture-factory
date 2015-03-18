@@ -25,7 +25,7 @@ def get_version():
     pattern = r"^__version__ = '(.*?)'$"
     return re.search(pattern, contents, re.MULTILINE).group(1)
 
-needs_pytest = {'ptr', 'pytest', 'test'}.intersection(sys.argv)
+needs_pytest = set(['ptr', 'pytest', 'test']).intersection(sys.argv)
 pytest_runner = ['pytest-runner'] if needs_pytest else []
 
 setup(
