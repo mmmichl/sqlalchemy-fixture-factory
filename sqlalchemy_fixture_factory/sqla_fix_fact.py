@@ -15,6 +15,9 @@ METHOD_CREATE = 'create'
 METHOD_GET = 'get'
 
 class SqlaFixFact():
+    """
+    Fixture factory manager
+    """
     db_session = None
     instances = None
 
@@ -47,12 +50,36 @@ class SqlaFixFact():
 # sub factory things
 ######
 def subFactoryGet(fixture, **kwargs):
+    """
+    To be used in fixture definition (or in the kwargs of the fixture constructor) to reference a other
+    fixture using the :meth:`.BaseFix.get` method.
+
+    :param fixture: Desired fixture
+    :param kwargs: *Optional:* key words to overwrite properties of this fixture
+    :return: Proxy object for the desired fixture including the altered properties
+    """
     return SubFactory(fixture, METHOD_GET, **kwargs)
 
 def subFactoryCreate(fixture, **kwargs):
+    """
+    To be used in fixture definition (or in the kwargs of the fixture constructor) to reference a other
+    fixture using the :meth:`.BaseFix.create` method.
+
+    :param fixture: Desired fixture
+    :param kwargs: *Optional:* key words to overwrite properties of this fixture
+    :return: Proxy object for the desired fixture including the altered properties
+    """
     return SubFactory(fixture, METHOD_CREATE, **kwargs)
 
 def subFactoryModel(fixture, **kwargs):
+    """
+    To be used in fixture definition (or in the kwargs of the fixture constructor) to reference a other
+    fixture using the :meth:`.BaseFix.model` method.
+
+    :param fixture: Desired fixture
+    :param kwargs: *Optional:* key words to overwrite properties of this fixture
+    :return: Proxy object for the desired fixture including the altered properties
+    """
     return SubFactory(fixture, METHOD_MODEL, **kwargs)
 
 
@@ -67,11 +94,19 @@ class SubFactory():
 
 
 class BaseFix():
+    """
+    Base class for each fixture
+    """
     MODEL = None
     _fix_fact = None
     _kwargs = None
 
     def __init__(self, fix_fact, **kwargs):
+        """
+
+        :param fix_fact: instance of :class:`.SqlaFixFact`
+        :param kwargs: *Optional:* key words to overwrite properties of this fixture
+        """
         if not self.MODEL:
             raise AttributeError('self.MODEL is not defined')
 
@@ -91,6 +126,12 @@ class BaseFix():
                         raise AttributeError('References in fixtures must be declared with "SubFactory": ' + rel.key)
 
     def model(self):
+        """
+        Returns a model instance of this fixture which is ready to be added. The model itself is not added to the DB
+        but all dependencies are.
+
+        :return: SQLAlchemy Model instance
+        """
         # INFOs
         # attr + relations:
         # [f.key for f in Group._sa_class_manager.attributes]
@@ -114,7 +155,7 @@ class BaseFix():
         Adds this model to the session. This instance is not registered and thus can never be
         referred to via get
 
-        :return:
+        :return: SQLAlchemy Model instance
         """
 
         model = self.model()
@@ -132,7 +173,7 @@ class BaseFix():
         returns an already existing model instance or creates one, registers it to be able to
         find it later and then returns the instance
 
-        :return:
+        :return: SQLAlchemy Model instance
         """
         return self._fix_fact.get(self.__class__, **self._kwargs)
 

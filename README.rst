@@ -7,7 +7,7 @@ A fixture factory for SQLAlchemy ORM mapper to easily build test scenarios for u
 Inspired by Ruby's `factory_girl <https://github.com/thoughtbot/factory_girl>`_
 
 Installation
-----------
+------------
 
     pip install sqlalchemy-fixture-factory
 
