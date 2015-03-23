@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
+# Copyright (c) 2015, Michael Pickelbauer
+# License: MIT (see LICENSE for details)
 
 """
 Fixture Factory for SQLAlchemy
-
-Copyright (c) 2005, Michael Pickelbauer
-License: MIT (see LICENSE for details)
 """
 from sqlalchemy import inspect
 from sqlalchemy.ext import hybrid
