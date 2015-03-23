@@ -172,7 +172,6 @@ class TestFixFact(TestCase):
 
         assert 1 == len(result)
 
-
     def test_create_with_reference_list(self):
         class AdminRole(BaseFix):
             MODEL = self.Role
@@ -195,3 +194,73 @@ class TestFixFact(TestCase):
         assert 'peter' == result.name
         assert 'admin' == result.roles[0].name
 
+    def test_sub_factory_get_delivers_same_instance_on_multiple_instantiations(self):
+        class FixPersonAccount(BaseFix):
+            MODEL = self.Account
+            name = 'supercheck'
+
+        class FixPerson(BaseFix):
+            MODEL = self.Person
+            first_name = 'Franz'
+            account = sqla_fix_fact.subFactoryGet(FixPersonAccount)
+
+        fix_person_1 = FixPerson(self.fix_fact).create()
+
+        assert fix_person_1 is not None
+        assert fix_person_1.id is not None
+        assert fix_person_1.account is not None
+
+        assert 1 == self.db_session.query(self.Person).count()
+        assert 1 == self.db_session.query(self.Account).count()
+
+        fix_person_2 = FixPerson(self.fix_fact).create()
+        fix_person_3 = FixPerson(self.fix_fact).create()
+
+        assert 3 == self.db_session.query(self.Person).count()
+        assert 1 == self.db_session.query(self.Account).count()
+
+    def test_model_instantiates_but_does_not_save_in_db(self):
+        class FixPerson(BaseFix):
+            MODEL = self.Person
+            first_name = 'Franz'
+
+        fix_model = FixPerson(self.fix_fact).model()
+
+        assert fix_model is not None
+        assert 0 == self.db_session.query(self.Person).count()
+
+    def test_model_does_creates_sub_factories_create_references_in_db(self):
+        class FixPersonAccount(BaseFix):
+            MODEL = self.Account
+            name = 'supercheck'
+
+        class FixPerson(BaseFix):
+            MODEL = self.Person
+            first_name = 'Franz'
+            account = sqla_fix_fact.subFactoryCreate(FixPersonAccount)
+
+        fix_model = FixPerson(self.fix_fact).model()
+
+        assert fix_model is not None
+        assert 0 == self.db_session.query(self.Person).count()
+        assert 1 == self.db_session.query(self.Account).count()
+
+        account_entry = self.db_session.query(self.Account).all()[0]
+
+        assert account_entry == fix_model.account
+
+    def test_model_does_not_create_sub_factories_model_references_in_db(self):
+        class FixPersonAccount(BaseFix):
+            MODEL = self.Account
+            name = 'supercheck'
+
+        class FixPerson(BaseFix):
+            MODEL = self.Person
+            first_name = 'Franz'
+            account = sqla_fix_fact.subFactoryModel(FixPersonAccount)
+
+        fix_model = FixPerson(self.fix_fact).model()
+
+        assert fix_model is not None
+        assert 0 == self.db_session.query(self.Person).count()
+        assert 0 == self.db_session.query(self.Account).count()
