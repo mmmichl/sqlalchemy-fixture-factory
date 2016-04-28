@@ -175,7 +175,7 @@ You can find this examples ready to play around in ``readme_examples.py``
 Resources
 ---------
 
-- `Documentation <http://sqlalchemy-fixture-factory.readthedocs.org/>`_
+- `Documentation <http://sqlalchemy-fixture-factory.readthedocs.io/>`_
 - `Issue Tracker <https://github.com/mmmichl/sqlalchemy-fixture-factory/issues>`_
 - `Code <https://github.com/mmmichl/sqlalchemy-fixture-factory/>`_
 

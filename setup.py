@@ -36,7 +36,7 @@ setup(
     author='Michael Pickelbauer',
     author_email='mmmichlPi' '@' 'gmail.com',
     description='Test Fixture Factory for SQLAlchemy. Inspired by Ruby\'s factory_girl',
-    keywords='SQLAlchemy test fixtures database-testing',
+    keywords='SQLAlchemy test fixtures database-testing scenario builder',
     long_description=open('README.rst').read(),
     packages=find_packages(exclude=['tests']),
     zip_safe=False,
@@ -51,7 +51,7 @@ setup(
         'pytest',
     ],
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
 
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Testing',
